@@ -4,7 +4,8 @@ import random
 
 def corrupt_mnist():
     """Return train and test dataloaders for corrupt MNIST."""
-    data_path = r"C:\Users\emilg\Desktop\DTU\1. Semester\Machine Learning Operations\corruptmnist_v1-20250106T101947Z-001\corruptmnist_v1"
+    #data_path = r"C:\Users\emilg\Desktop\DTU\1. Semester\Machine Learning Operations\corruptmnist_v1-20250106T101947Z-001\corruptmnist_v1"
+    data_path = r"/workspaces/Machine-Learning-Operations/S1/data"
     train_images = []
     train_targets = []
     
