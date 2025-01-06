@@ -85,3 +85,4 @@ def conda(ctx, name: str = "dtu_mlops"):
     ctx.run(f"conda env create -f environment.yml", echo=True)
     ctx.run(f"conda activate {name}", echo=True)
     ctx.run(f"pip install -e .", echo=True)
+    
