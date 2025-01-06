@@ -2,8 +2,8 @@ import torch
 import typer
 from torch import nn
 from torch import optim
-from data import corrupt_mnist
-from model import MyAwesomeModel
+from mlops_grp69.data import corrupt_mnist
+from mlops_grp69.model import MyAwesomeModel
 import os
 from datetime import datetime
 
