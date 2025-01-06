@@ -7,4 +7,4 @@ def hello(count: int = 1, name: str = "World"):
         typer.echo(f"Hello {name}!")
 
 if __name__ == "__main__":
-    app()
+    app() 
