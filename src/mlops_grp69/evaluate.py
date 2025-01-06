@@ -21,10 +21,7 @@ def evaluate(model_checkpoint: str) -> None:
     _, test_set = corrupt_mnist()
     test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=32)
 
-    # Flatten the test images into 784-long vectors
-    test_images = test_images.view(test_images.shape[0], -1)
-
-    # Disable gradient calculations for evaluation
+    # Disable gradient calculations for evaluation  
     model.eval()
     correct, total = 0, 0
     for img, target in test_dataloader:

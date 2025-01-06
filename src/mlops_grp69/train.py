@@ -41,7 +41,7 @@ def train(lr: float = 1e-3) -> None:
             optimizer.step()
 
             running_loss += loss.item()
-        print(f"Epoch: {epoch}/{epochs} - Loss: {running_loss/epochs}")
+        print(f"Epoch: {epoch+1}/{epochs} - Loss: {running_loss/epochs}")
 
     # Ensure the models directory exists
     os.makedirs("models", exist_ok=True)
@@ -51,6 +51,7 @@ def train(lr: float = 1e-3) -> None:
 
     # Save the trained model
     torch.save(model.state_dict(), model_filename)
+    print(f"Model saved to {model_filename}")
 
 if __name__ == "__main__":
     typer.run(train)
