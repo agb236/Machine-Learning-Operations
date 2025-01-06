@@ -63,3 +63,8 @@ def build_docs(ctx: Context) -> None:
 def serve_docs(ctx: Context) -> None:
     """Serve documentation."""
     ctx.run("mkdocs serve --config-file docs/mkdocs.yaml", echo=True, pty=not WINDOWS)
+
+@task
+def greet(ctx, name="World"):
+    """Prints a greeting."""
+    print(f"Hello, {name}!")
