@@ -27,4 +27,4 @@ line-length = 120
 omit = ["tests/*"]
 
 [project.scripts]
-train = "my_project.train:main"
+train = "mlops_grp69.train:main"
