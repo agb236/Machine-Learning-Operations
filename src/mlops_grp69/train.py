@@ -46,7 +46,7 @@ def train(lr: float = 1e-3) -> None:
     # Ensure the models directory exists
     os.makedirs("models", exist_ok=True)
     # Generate a new filename based on the current timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now().strftime("%d-%H%M")
     model_filename = f"models/model_{timestamp}.pth"
 
     # Save the trained model

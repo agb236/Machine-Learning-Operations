@@ -11,7 +11,11 @@ from sklearn.manifold import TSNE
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
 def visualize(model_checkpoint: str, figure_name: str = "embeddings.png") -> None:
-    """Visualize model predictions."""
+    """Visualize model predictions.
+    use e.g.
+    python src/mlops_grp69/visualize.py "models/model_20250106_141157.pth" --figure-name "test.png"
+    to run with custom figure name with specific model checkpoint
+    """
     model = MyAwesomeModel().to(DEVICE)
     model.load_state_dict(torch.load(model_checkpoint, weights_only=True))
     model.eval()
