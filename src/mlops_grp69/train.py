@@ -29,8 +29,8 @@ def train(lr: float = 1e-3) -> None:
     for epoch in range(epochs):
         running_loss = 0
         for images, labels in train_dataloader:
-            # Flatten MNIST images into a 784-long vector
-            images = images.view(images.shape[0], -1)
+            # Remove the flattening of MNIST images
+            # images = images.view(images.shape[0], -1)
             optimizer.zero_grad()
 
             # Forward pass
@@ -41,7 +41,7 @@ def train(lr: float = 1e-3) -> None:
             optimizer.step()
 
             running_loss += loss.item()
-        print(f"Epoch: {epoch}/{epochs} - Loss: {running_loss/epoch}")
+        print(f"Epoch: {epoch}/{epochs} - Loss: {running_loss/epochs}")
 
     # Ensure the models directory exists
     os.makedirs("models", exist_ok=True)
