@@ -14,7 +14,7 @@ def visualize(model_checkpoint: str, figure_name: str = "embeddings.png") -> Non
     model = MyAwesomeModel().load_state_dict(torch.load(model_checkpoint))
     model.eval()
     model.fc = torch.nn.Identity()
-
+ 
     test_images = torch.load("data/processed/test_images.pt")
     test_target = torch.load("data/processed/test_target.pt")
     test_dataset = torch.utils.data.TensorDataset(test_images, test_target)
