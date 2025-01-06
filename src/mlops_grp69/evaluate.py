@@ -15,7 +15,7 @@ def evaluate(model_checkpoint: str) -> None:
 
     # Load the trained model
     model = MyAwesomeModel().to(DEVICE)
-    model.load_state_dict(torch.load(model_checkpoint))
+    model.load_state_dict(torch.load(model_checkpoint, weights_only=True))
     model.eval()  # Set the model to evaluation mode
 
     _, test_set = corrupt_mnist()
