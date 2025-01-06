@@ -68,3 +68,8 @@ def serve_docs(ctx: Context) -> None:
 def greet(ctx, name="World"):
     """Prints a greeting."""
     print(f"Hello, {name}!")
+
+@task
+def python(ctx):
+    """ """
+    ctx.run("which python" if os.name != "nt" else "where python")
