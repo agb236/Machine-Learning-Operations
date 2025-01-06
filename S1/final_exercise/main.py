@@ -75,4 +75,4 @@ def evaluate(model_checkpoint: str) -> None:
 
 
 if __name__ == "__main__":
-    app()
+    app() 
