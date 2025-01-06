@@ -4,12 +4,11 @@ import random
 
 def corrupt_mnist():
     """Return train and test dataloaders for corrupt MNIST."""
-    #data_path = r"C:\Users\emilg\Desktop\DTU\1. Semester\Machine Learning Operations\corruptmnist_v1-20250106T101947Z-001\corruptmnist_v1"
     data_path = r"data/corruptmnist/"
     train_images = []
     train_targets = []
     
-    for i in range(5):  # Loop over the 5 files
+    for i in range(6):  # Loop over the 5 files
         train_images.append(torch.load(f"{data_path}train_images_{i}.pt"))
         train_targets.append(torch.load(f"{data_path}train_target_{i}.pt"))
     
@@ -26,6 +25,7 @@ def corrupt_mnist():
 train, test = corrupt_mnist()
 train_images = train[0]
 train_targets = train[1]
+
 # Plot one of the images
 def plot_image(images, index):
     """Plot a single MNIST image."""
@@ -35,5 +35,6 @@ def plot_image(images, index):
     plt.axis("off")
     plt.show()
 
-# Plot the first image
-plot_image(train_images, index=random.randint(0, 25000))
+if __name__ == "__main__":
+    # Plot the first image
+    plot_image(train_images, index=random.randint(0, 25000))
