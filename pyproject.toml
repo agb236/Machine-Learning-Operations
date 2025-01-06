@@ -28,4 +28,4 @@ omit = ["tests/*"]
 
 [project.scripts]
 train = "mlops_grp69.train:train"
-evaluate = "mlops_grp69.evaluate:train"
+evaluate = "mlops_grp69.evaluate:evaluate"
