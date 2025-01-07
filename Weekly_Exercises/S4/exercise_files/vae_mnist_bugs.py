@@ -12,9 +12,9 @@ from torchvision.datasets import MNIST
 from torchvision.utils import save_image
 
 # Model Hyperparameters
-dataset_path = "datasets"
+dataset_path = "/workspaces/Machine-Learning-Operations/data/raw"
 cuda = True
-DEVICE = torch.device("cuda" if cuda else "cpu")
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 batch_size = 100
 x_dim = 784
 hidden_dim = 400
