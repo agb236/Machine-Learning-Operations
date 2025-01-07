@@ -1,13 +1,21 @@
+import sys
+sys.path.append("./")
+
 import torch
 import typer
 from torch import nn
 from torch import optim
 from data import corrupt_mnist
 from model import MyAwesomeModel
+from omegaconf import OmegaConf
+
+# Load the configuration file
+config = OmegaConf.load('config.yaml')
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 app = typer.Typer()
 
+torch.manual_seed(config.hyperparameters.seed)
 
 @app.command()
 def train(lr: float = 1e-3) -> None:
@@ -19,9 +27,9 @@ def train(lr: float = 1e-3) -> None:
     model = MyAwesomeModel()
     train_set, _ = corrupt_mnist()
     # Define hyper parameters
-    epochs = 10
-    learning_rate = 0.003
-    batch_size = 32
+    epochs = config.hyperparameters.epochs
+    learning_rate = config.hyperparameters.learning_rate
+    batch_size = config.hyperparameters.batch_size
     # Define the loss function and optimizer
     loss_fn = torch.nn.CrossEntropyLoss()
     optimizer = optim.AdamW(model.parameters(), lr=learning_rate)
@@ -56,8 +64,10 @@ def evaluate(model_checkpoint: str) -> None:
     model.load_state_dict(torch.load(model_checkpoint))
     model.eval()  # Set the model to evaluation mode
 
+    batch_size = config.hyperparameters.batch_size
+
     _, test_set = corrupt_mnist()
-    test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=32)
+    test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=batch_size)
 
     # Flatten the test images into 784-long vectors
     test_images = test_images.view(test_images.shape[0], -1)
