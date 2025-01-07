@@ -18,11 +18,8 @@ from torchvision.utils import save_image
 
 log = logging.getLogger(__name__)
 
-# Load the configuration file
-config = OmegaConf.load('config.yaml')
 
-
-@hydra.main(config_path="config", config_name="default_config.yaml")
+@hydra.main(config_path="config", config_name="default_config.yaml", version_base="1.1")
 def train(config) -> None:
     """Train VAE on MNIST."""
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")

@@ -1,1 +1,2 @@
-configs/config.yamlconfigs/config.yaml
+defaults:
+    - experiment: exp1
