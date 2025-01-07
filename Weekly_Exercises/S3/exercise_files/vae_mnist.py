@@ -13,14 +13,18 @@ from torch.optim import Adam
 from torch.utils.data import DataLoader
 from torchvision.datasets import MNIST
 from torchvision.utils import save_image
+from omegaconf import OmegaConf
+
+config = OmegaConf.load('config.yaml')
 
 # Model Hyperparameters
-dataset_path = "~/datasets"
+dataset_path = config.dataset_path
 cuda = True
 DEVICE = torch.device("cuda" if cuda else "cpu")
-batch_size = 100
-x_dim = 784
-hidden_dim = 400
+batch_size = config.batch_size
+x_dim = config.x_dim
+hidden_dim = config.hidden_dim
+latent_dim = config.latent_dim
 
 # Data loading
 mnist_transform = transforms.Compose([transforms.ToTensor()])
@@ -31,8 +35,8 @@ test_dataset = MNIST(dataset_path, transform=mnist_transform, train=False, downl
 train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
 
-encoder = Encoder(input_dim=x_dim, hidden_dim=hidden_dim, latent_dim=20)
-decoder = Decoder(latent_dim=20, hidden_dim=hidden_dim, output_dim=x_dim)
+encoder = Encoder(input_dim=x_dim, hidden_dim=hidden_dim, latent_dim=latent_dim)
+decoder = Decoder(latent_dim=latent_dim, hidden_dim=hidden_dim, output_dim=x_dim)
 
 model = Model(Encoder=encoder, Decoder=decoder).to(DEVICE)
 
@@ -44,12 +48,12 @@ def loss_function(x, x_hat, mean, log_var):
     return reproduction_loss + kld
 
 
-optimizer = Adam(model.parameters(), lr=1e-3)
+optimizer = Adam(model.parameters(), lr=config.lr)
 
 
 print("Start training VAE...")
 model.train()
-for epoch in range(20):
+for epoch in range(config.epochs):
     overall_loss = 0
     for batch_idx, (x, _) in enumerate(train_loader):
         if batch_idx % 100 == 0:
